@@ -28,7 +28,6 @@ namespace ClinicaMedica2025.Controllers
         public ActionResult CargarPacientesAlSistema()
         {
             ViewBag.Mensaje = $"Cargar pacientes al sistema";
-
             return View();
         }
 
