@@ -3,7 +3,126 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="text-center">@ViewBag.Mensaje</h2>
-<div class="card mt-3">
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
 
+<div class="row">
+
+    <div class="col-lg-6 col-md-12">
+        <div class="card shadow-lg">
+            <div class="card-header text-bg-primary"><h3 class="text-center">📝 Registrar paciente</h3></div>
+            <div class="card-body">
+
+                @if (ViewBag.Creado == null)
+                {
+                    <form action="@Url.Action("CargarPacientesEnColaDeEspera","Home")" method="post">
+
+                        <h5 class="mt-2">Datos Personales</h5>
+                        <div class="mb-3">
+                            <label>Cuil</label>
+                            <input type="text" class="form-control" name="paciente.Cuil" required />
+                        </div>
+                        <div class="mb-3">
+                            <label>Nombre</label>
+                            <input type="text" class="form-control" name="paciente.Nombre" required />
+                        </div>
+                        <div class="mb-3">
+                            <label>Apellido</label>
+                            <input type="text" class="form-control" name="paciente.Apellido" required />
+                        </div>
+                        <div class="mb-3">
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="paciente.Email" required />
+                        </div>
+
+                        <hr />
+
+                        <h5 class="mt-4">Datos de Ingreso y Triage</h5>
+
+                        @*<div class="mb-3">
+                            <label>ID o Matrícula Obra Social</label>
+                            <input type="text" class="form-control" name="ingreso.idObraSocial" required />
+                        </div>*@
+
+                        <div class="mb-3">
+                            <label>Nombre de la enfermera/o</label>
+                            <input type="text" class="form-control" name="enfermera.Nombre" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Obra Social</label>
+                            <div class="form-check"><input type="radio" class="form-check-input" name="ingreso.idObraSocial" value="10" required /><label class="form-check-label">OSDE</label></div>
+                            <div class="form-check"><input type="radio" class="form-check-input" name="ingreso.idObraSocial" value="20" required /><label class="form-check-label">Swiss Medical</label></div>
+                            <div class="form-check"><input type="radio" class="form-check-input" name="ingreso.idObraSocial" value="30" required /><label class="form-check-label">Prensa</label></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Estado de ingreso</label>
+                            <div class="form-check"><input type="radio" class="form-check-input" name="ingreso.estadoIngreso" value="0" required /><label class="form-check-label">Pendiente</label></div>
+                            <div class="form-check"><input type="radio" class="form-check-input" name="ingreso.estadoIngreso" value="1" required /><label class="form-check-label">En proceso</label></div>
+                            <div class="form-check"><input type="radio" class="form-check-input" name="ingreso.estadoIngreso" value="2" required /><label class="form-check-label">Finalizado</label></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Nivel de Triage</label>
+
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="ingreso.NivelIdRecibido" value="1" required />
+                                <label class="form-check-label">1 - Crítica</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="ingreso.NivelIdRecibido" value="2" required />
+                                <label class="form-check-label">2 - Emergencia</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="ingreso.NivelIdRecibido" value="3" required />
+                                <label class="form-check-label">3 - Urgencia</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="ingreso.NivelIdRecibido" value="4" required />
+                                <label class="form-check-label">4 - Urgencia Menor</label>
+                            </div>
+
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" name="ingreso.NivelIdRecibido" value="5" required />
+                                <label class="form-check-label">5 - Sin Urgencia</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="d-grid">
+                                <button class="btn btn-primary" type="submit">Registrar Paciente</button>
+                            </div>
+                        </div>
+                    </form>
+                }
+                else
+                {
+                    <div class="alert alert-success">
+                        <p>@ViewBag.Mensaje</p>
+                        <a class="btn btn-success" href="@Url.Action("CargarPacientesEnColaDeEspera","Home")">Registrar otro paciente</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6 col-md-12">
+        <div class="card shadow-lg h-100">
+            <div class="card-header text-bg-secondary"><h3 class="text-center">🏥 Cola de Atención (Prioridad)</h3></div>
+            <div class="card-body">
+                @if (!string.IsNullOrEmpty(ViewBag.ColaAtencion)) // Si la cola tiene texto (la lógica GET la llena)
+                {
+                    <pre>@ViewBag.ColaAtencion</pre>
+                }
+                else
+                {
+                    <div class="alert alert-info">No hay pacientes en la cola de espera.</div>
+                }
+            </div>
+        </div>
+    </div>
 </div>

@@ -12,6 +12,7 @@ namespace ClinicaMedica2025.Models
         public string idObraSocial { get; set; }
         public Enfermera enfermera { get; set; }
         public Nivel nivel { get; set; }
+        public int NivelIdRecibido { get; set; }
         public EstadoIngreso estadoIngreso { get; set; }
         public string descripcion { get; set; }
         public DateTime fechaIngreso { get; set; } = DateTime.Now;
