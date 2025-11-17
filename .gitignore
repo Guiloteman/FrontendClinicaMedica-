@@ -1,0 +1,18 @@
+# Directorios de compilación y temporales
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+# Archivos de la solución y de usuario
+*.suo
+*.user
+*.bak
+*.~*
+*.tmp
+
+# Archivos y directorios de Visual Studio (IDE)
+.vs/
+
+# Paquetes NuGet y dependencias
+packages/
